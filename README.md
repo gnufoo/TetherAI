@@ -1,76 +1,43 @@
-# TetherAI
+# TranscenD
 
-**A sovereign wallet + on-device AI demo** — built to pitch a Tether × Transsion partnership.
+**The future of USD₮, on your phone.**
 
-Target hardware: Infinix Note 50 Pro (Mali-G57 MC2, 8GB RAM).
-Powered by: Tether WDK (wallet) + Tether QVAC (edge AI, coming in v0.3).
+Mobile USD₮ wallet built on the [Tether Wallet Development Kit (WDK)](https://docs.wdk.tether.io/), extended with Transsion-native capabilities:
 
-## Quick Start (Windows development machine)
+1. **WDK Tether Wallet** — full multi-chain USD₮ wallet powered by WDK + Bare runtime
+2. **Tether Edge AI** — on-device agentic intelligence for your wallet
+3. **Offline USD₮ Transfer** — device-to-device USD₮ transfers with no internet required
 
-**Prerequisites:**
-- Node 20+ (you have via Android Studio tooling)
-- Android Studio with at least one AVD (emulator) set up
-- Git configured
+## Foundation
 
-**First-time setup:**
-```powershell
-# Clone (you already did this)
-git clone https://github.com/gnufoo/TetherAI.git
-cd TetherAI
+TranscenD forks from [`@tetherto/wdk-starter-react-native`](https://github.com/tetherto/wdk-starter-react-native) (Apache 2.0). We extend the reference implementation with the three pillars above.
 
-# Install dependencies
-npm install
+## Stack
 
-# Start Expo dev server
-npx expo start
-# Press 'a' to launch on Android emulator
-# Press 'r' to reload, 'shift+r' to clear cache + reload
+- **Expo** ~54 (React Native 0.81.4, React 19.1.0)
+- **expo-router** for file-based routing
+- **Tether WDK** via `@tetherto/wdk-react-native-provider` + `react-native-bare-kit`
+- **Bare runtime** for isolated cryptographic operations
+- **Android minSdk 29** (required by bare-kit)
+- **iOS 15.1+**
+
+## Build Pipeline
+
+Server-side builds on `mecp-server` (see `../BUILD_PIPELINE.md`).
+Triggered by Zero, delivered as APK via HTTP tunnel.
+
+## Local Development
+
+```bash
+# After build: install APK on device, then
+npx expo start --dev-client --tunnel
 ```
 
-**Every iteration after that:**
-```powershell
-git pull            # Pull latest changes from Zero (on GCP)
-# App hot-reloads automatically if Expo is running
-# If package.json changed: npm install first
-```
+## Configuration
 
-## How to Send State Back to Zero
+Create `.env` from `.env.example` and fill in API keys for full functionality
+(WDK Indexer, Tron provider).
 
-Zero can't see your emulator. Help him by committing screenshots and logs:
+## License
 
-```powershell
-# Screenshot the emulator
-adb exec-out screencap -p > docs\screens\latest.png
-git add docs\screens\latest.png
-git commit -m "screenshot: [what screen]"
-git push
-
-# Grab recent logs
-adb logcat -d -t 200 > docs\logcat.txt
-git add docs\logcat.txt
-git commit -m "logs: [what happened]"
-git push
-```
-
-## Project Structure
-
-```
-TetherAI/
-├── app/              # Expo Router screens (React Native)
-├── src/
-│   ├── wallet/       # WDK integration
-│   ├── ai/           # QVAC integration (v0.3+)
-│   ├── agent/        # Unified NL → action layer (v0.4+)
-│   └── ui/           # Shared UI components
-├── assets/           # Images, fonts
-├── docs/             # Screenshots, logs, build notes
-└── package.json
-```
-
-## Roadmap
-
-- **v0.1** ← *you are here*: Scaffold + splash + wallet screen skeleton
-- **v0.2**: WDK integration, seed generation, real USDT balance on Tron testnet
-- **v0.3**: QVAC edge AI, BitNet 1B running locally
-- **v0.4**: Unified agent — natural language → wallet actions
-- **v1.0**: Infinix Note 50 Pro polish, demo video, Tether+Transsion pitch
+Apache 2.0 (inherited from WDK starter).

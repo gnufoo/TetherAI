@@ -1,4 +1,4 @@
-# Dependencies
+# dependencies
 node_modules/
 
 # Expo
@@ -8,6 +8,7 @@ web-build/
 expo-env.d.ts
 
 # Native
+.kotlin/
 *.orig.*
 *.jks
 *.p8
@@ -18,32 +19,33 @@ expo-env.d.ts
 # Metro
 .metro-health-check*
 
-# Debug logs
+# debug
 npm-debug.*
 yarn-debug.*
 yarn-error.*
 
 # macOS
 .DS_Store
+*.pem
 
-# Android Studio / Gradle (if we eject)
-android/.gradle/
-android/build/
-android/app/build/
-android/local.properties
-android/keystore/
-ios/Pods/
-ios/build/
+# local env files
+.env*.local
 
-# Env
-.env
-.env.local
-
-# IDE
-.vscode/
-.idea/
-
-# TypeScript build
+# typescript
 *.tsbuildinfo
 
-# Local screenshot uploads (we DO want docs/screens committed, handled per-file)
+# IDE
+.vscode
+
+app-example
+
+# generated native folders
+/ios
+/android
+
+.env
+.npmrc
+
+# E2E tests
+test/apps/
+

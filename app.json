@@ -1,61 +1,85 @@
 {
   "expo": {
-    "name": "TetherAI",
-    "slug": "tetherai",
+    "name": "TranscenD",
+    "slug": "transcend",
     "version": "0.1.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
-    "scheme": "tetherai",
-    "userInterfaceStyle": "dark",
+    "developmentClient": true,
+    "icon": "./assets/images/icon.png",
+    "scheme": "transcend",
     "newArchEnabled": true,
-    "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#0a0a0a"
-    },
     "ios": {
       "supportsTablet": false,
-      "bundleIdentifier": "com.gnufoo.tetherai"
+      "bundleIdentifier": "com.transsion.transcend",
+      "infoPlist": {
+        "UIStatusBarStyle": "UIStatusBarStyleLightContent",
+        "UIViewControllerBasedStatusBarAppearance": false,
+        "NSFaceIDUsageDescription": "This app uses Face ID to secure your wallet and authenticate transactions.",
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
-      "package": "com.gnufoo.tetherai",
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#0a0a0a"
+        "backgroundColor": "#0A0A0A",
+        "foregroundImage": "./assets/images/android-icon-foreground.png",
+        "backgroundImage": "./assets/images/android-icon-background.png",
+        "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "predictiveBackGestureEnabled": false,
+      "package": "com.transsion.transcend",
+      "statusBar": {
+        "style": "light",
+        "backgroundColor": "#0A0A0A"
+      }
     },
     "web": {
-      "bundler": "metro",
-      "favicon": "./assets/favicon.png"
+      "output": "static",
+      "favicon": "./assets/images/favicon.png"
     },
+    "splash": {
+      "image": "./assets/images/splash-logo.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#0A0A0A",
+      "dark": {
+        "backgroundColor": "#0A0A0A"
+      }
+    },
+    "userInterfaceStyle": "dark",
     "plugins": [
       "expo-router",
-      "expo-font",
-      "expo-dev-client",
-      "expo-secure-store",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/images/splash-logo.png",
+          "imageWidth": 200,
+          "resizeMode": "contain",
+          "backgroundColor": "#0A0A0A"
+        }
+      ],
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Allow TranscenD to access your camera"
+        }
+      ],
       [
         "expo-build-properties",
         {
           "android": {
-            "minSdkVersion": 26,
-            "compileSdkVersion": 35,
-            "targetSdkVersion": 35,
-            "kotlinVersion": "2.0.21",
-            "enableProguardInReleaseBuilds": false,
-            "packagingOptions": {
-              "pickFirst": [
-                "**/libc++_shared.so",
-                "**/libfbjni.so",
-                "**/libjsi.so"
-              ]
-            }
+            "minSdkVersion": 29,
+            "compileSdkVersion": 36,
+            "buildToolsVersion": "36.0.0",
+            "enableProguardInReleaseBuilds": true,
+            "enableShrinkResourcesInReleaseBuilds": true
           }
         }
-      ]
+      ],
+      "./plugins/withAndroidSubprojects.js"
     ],
     "experiments": {
-      "typedRoutes": true
+      "typedRoutes": true,
+      "reactCompiler": true
     }
   }
 }
