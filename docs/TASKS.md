@@ -119,6 +119,16 @@ If something breaks: screenshot + paste the error into chat.
 
 ---
 
+## Task 002 — DONE ✅ (2026-04-17)
+
+Custom Dev Client APK built and running on device. Full path:
+- Expo Dev Client + WDK + expo-secure-store bundled
+- Building server-side on mecp-server (Zero owns the pipeline)
+- JDK 17, Kotlin 2.1.20, React 19.1.0 (exact-match renderer)
+- 207 MB APK, ~12 min first build, fast hot reload after
+
+Stub wallet renders correctly: "Wallet not initialized · awaiting WDK bare-kit bridge".
+
 ## Task 001 — DONE ✅
 
 v0.1 scaffold working on Expo Go. Home + 3 tiles. Visual identity locked.
