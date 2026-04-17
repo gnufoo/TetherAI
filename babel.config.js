@@ -6,7 +6,7 @@ module.exports = function (api) {
       'nativewind/babel',
     ],
     plugins: [
-      // Reanimated 4 uses the worklets plugin (must be LAST)
+      // Must be LAST.
       'react-native-worklets/plugin',
     ],
   };
