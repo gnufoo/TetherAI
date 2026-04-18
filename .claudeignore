@@ -1,0 +1,21 @@
+# Heavy native build artifacts
+android/app/build/
+android/.gradle/
+android/app/.cxx/
+
+# Node modules (Claude reads package.json + specific files when needed)
+node_modules/
+
+# QVAC model files and native prebuilds
+*.bare
+*.so
+*.dylib
+*.a
+
+# iOS (not building for iOS)
+ios/
+
+# Build caches
+.expo/
+*.apk
+*.aab

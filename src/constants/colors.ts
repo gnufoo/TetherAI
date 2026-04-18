@@ -1,7 +1,7 @@
 export const colors = {
   // Primary colors
   background: '#121212',
-  primary: '#FF6501',
+  primary: '#50AF95',
 
   // Text colors
   text: '#fff',
@@ -23,6 +23,11 @@ export const colors = {
   danger: '#FF3B30',
   warning: '#FF9500',
   error: '#FF6B6B',
+
+  // Tether/Transcend accent
+  tetherGreen: '#26A17B',
+  tetherGreenFaded: 'rgba(38, 161, 123, 0.2)',
+  tetherGreenBorder: 'rgba(38, 161, 123, 0.3)',
 
   // Transparent backgrounds
   overlay: 'rgba(0, 0, 0, 0.7)',
