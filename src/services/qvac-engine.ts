@@ -27,6 +27,11 @@ let state: AgentState = {
 
 let modelId: string | null = null;
 
+// Shipping guard: the embedded 773MB GGUF path is unstable on-device right now.
+// Keep wallet flows alive by using the deterministic mock/parser fallback until
+// QVAC model delivery is fixed independently.
+const QVAC_EMBEDDED_MODEL_ENABLED = false;
+
 type Listener = (s: AgentState) => void;
 const listeners: Listener[] = [];
 
@@ -46,6 +51,11 @@ function setState(patch: Partial<AgentState>) {
 
 export async function loadModel(fast = false) {
   if (state.loaded || state.loading) return;
+  if (!QVAC_EMBEDDED_MODEL_ENABLED) {
+    console.warn('[qvac] Embedded model loading disabled; using mock/parser fallback.');
+    setState({ loaded: false, loading: false, loadProgress: 0 });
+    return;
+  }
   setState({ loading: true, loadProgress: 0 });
   const t0 = Date.now();
   try {
@@ -79,7 +89,8 @@ export async function loadModel(fast = false) {
   } catch (e: any) {
     const msg = e?.message || e?.toString?.() || JSON.stringify(e) || 'Unknown error';
     console.error(`[qvac] loadModel failed: ${msg}`, e?.stack || '');
-    setState({ loading: false, loadProgress: 0 });
+    setState({ loaded: false, loading: false, loadProgress: 0 });
+    throw new Error(msg);
   }
 }
 

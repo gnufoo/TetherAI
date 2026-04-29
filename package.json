@@ -16,7 +16,7 @@
     "prebuild": "expo prebuild",
     "prebuild:clean": "expo prebuild --clean",
     "preinstall": "npm install @tetherto/pear-wrk-wdk --ignore-scripts --legacy-peer-deps 2>/dev/null || true",
-    "postinstall": "bash scripts/copy-qvac-bundle.sh 2>/dev/null || true",
+    "postinstall": "bash scripts/copy-qvac-bundle.sh 2>/dev/null || true; bash scripts/patch-wdk-keychain.sh 2>/dev/null || true",
     "test:e2e": "export ANDROID_HOME=$HOME/Library/Android/sdk && export PATH=$PATH:$ANDROID_HOME/platform-tools && wdio run test/wdio.conf.ts",
     "test:e2e:ios": "export ANDROID_HOME=$HOME/Library/Android/sdk && export PATH=$PATH:$ANDROID_HOME/platform-tools && wdio run test/wdio.ios.conf.ts",
     "test:e2e:android": "export ANDROID_HOME=$HOME/Library/Android/sdk && export PATH=$PATH:$ANDROID_HOME/platform-tools && wdio run test/wdio.conf.ts",

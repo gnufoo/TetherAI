@@ -25,25 +25,28 @@ export function patchKeychainSecurity() {
   Keychain.setGenericPassword = (
     username: string,
     password: string,
-    options?: Keychain.Options,
+    options?: Parameters<typeof originalSet>[2],
   ) => {
     const patchedOptions = {
       ...options,
-      // Force software-backed AES instead of hardware Keystore
+      // Force no-auth AES instead of biometric/hardware-gated Keystore paths.
       securityLevel: Keychain.SECURITY_LEVEL.ANY,
-      // Use Facebook Conceal as storage backend (avoids Keystore entirely)
-      storage: Keychain.STORAGE_TYPE.AES,
+      storage: Keychain.STORAGE_TYPE.AES_GCM_NO_AUTH,
     };
+    delete (patchedOptions as any).accessControl;
     console.log(`[keychain-patch] setGenericPassword (service: ${patchedOptions.service || 'default'}, security: ANY)`);
     return originalSet(username, password, patchedOptions);
   };
 
   // @ts-ignore - monkey-patching
-  Keychain.getGenericPassword = (options?: Keychain.Options) => {
+  Keychain.getGenericPassword = (options?: Parameters<typeof originalGet>[0]) => {
     const patchedOptions = {
       ...options,
       securityLevel: Keychain.SECURITY_LEVEL.ANY,
+      storage: Keychain.STORAGE_TYPE.AES_GCM_NO_AUTH,
     };
+    delete (patchedOptions as any).accessControl;
+    console.log(`[keychain-patch] getGenericPassword (service: ${patchedOptions.service || 'default'}, security: ANY, storage: AES_GCM_NO_AUTH)`);
     return originalGet(patchedOptions);
   };
 

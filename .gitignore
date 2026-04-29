@@ -48,4 +48,5 @@ app-example
 
 # E2E tests
 test/apps/
-
+.cache/
+test-results/

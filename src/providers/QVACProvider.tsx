@@ -66,7 +66,11 @@ export default function QVACProvider({ children }: { children: React.ReactNode }
     );
     try {
       await Promise.race([loadModel(true), timeout]);
-      debugLog('Model loaded successfully', 'qvac', 'info');
+      if (stateRef.current.loaded) {
+        debugLog('Model loaded successfully', 'qvac', 'info');
+      } else {
+        debugLog('QVAC embedded model disabled/unavailable — using parser fallback', 'qvac', 'warn');
+      }
     } catch (e: any) {
       debugLog(`Model load failed: ${e?.message ?? e}`, 'qvac', 'error');
     }
